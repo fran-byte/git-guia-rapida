@@ -1,8 +1,7 @@
 # Guía Rápida de Git
 
-## Comandos Potencialmente Peligrosos/Irreversibles
 
-⚠️ **ADVERTENCIA**: Los siguientes comandos pueden causar pérdida de trabajo no commitado o alterar permanentemente el historial:
+⚠️ **ADVERTENCIA**: comandos pueden causar pérdida de trabajo no commitado o alterar permanentemente el historial
 
 | Comando | Riesgo |
 |---------|--------|
@@ -130,3 +129,21 @@ tmp/
 ```
 
 Se ignoran todos los archivos en directorio logs (excepto `.gitkeep`), directorio tmp y archivos `.svp`.
+
+---
+
+## Comandos Potencialmente Peligrosos/Irreversibles
+
+⚠️ **ADVERTENCIA**: Los siguientes comandos pueden causar pérdida de trabajo no commitado o alterar permanentemente el historial:
+
+| Comando | Riesgo |
+|---------|--------|
+| `git checkout -- [archivo]` | Descarta cambios locales permanentemente |
+| `git reset --hard [commit]` | Elimina commits y cambios no commitados |
+| `git clean -fd` | Elimina archivos no rastreados permanentemente |
+| `git push --force` | Sobrescribe historial remoto (puede afectar a otros colaboradores) |
+| `git stash drop` | Elimina cambios almacenados en stash |
+| `git stash clear` | Elimina todos los stashes |
+| `git branch -D [rama]` | Fuerza eliminación de rama (incluso sin merge) |
+| `git rebase --interactive` | Puede reescribir historial de commits |
+
