@@ -276,5 +276,4 @@ docs: actualizar documentación
 ---
 
 
-¿Quieres que haga esa versión visual?
 ```
