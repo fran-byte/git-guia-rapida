@@ -1,5 +1,20 @@
 # Guía Rápida de Git
 
+## Comandos Potencialmente Peligrosos/Irreversibles
+
+⚠️ **ADVERTENCIA**: Los siguientes comandos pueden causar pérdida de trabajo no commitado o alterar permanentemente el historial:
+
+| Comando | Riesgo |
+|---------|--------|
+| `git checkout -- [archivo]` | Descarta cambios locales permanentemente |
+| `git reset --hard [commit]` | Elimina commits y cambios no commitados |
+| `git clean -fd` | Elimina archivos no rastreados permanentemente |
+| `git push --force` | Sobrescribe historial remoto (puede afectar a otros colaboradores) |
+| `git stash drop` | Elimina cambios almacenados en stash |
+| `git stash clear` | Elimina todos los stashes |
+| `git branch -D [rama]` | Fuerza eliminación de rama (incluso sin merge) |
+| `git rebase --interactive` | Puede reescribir historial de commits |
+
 ## 01 Configuración de Git
 
 | Comando | Descripción |
@@ -34,7 +49,8 @@
 |---------|-------------|
 | `git stash` | Guarda cambios actuales para uso posterior |
 | `git stash pop` | Aplica el contenido almacenado y limpia el stash |
-| `git stash drop` | Elimina un stash específico |
+| ⚠️ `git stash drop` | Elimina un stash específico (irreversible) |
+| ⚠️ `git stash clear` | Elimina todos los stashes (irreversible) |
 
 ## 05 Modelo de Ramas
 
@@ -45,7 +61,7 @@
 | `git rebase [nombre_rama]` | Aplica commits de la rama actual al HEAD de otra rama |
 | `git checkout [-b] [nombre_rama]` | Cambia a la rama especificada (con `-b` la crea si no existe) |
 | `git merge [nombre_rama]` | Fusiona la rama especificada con tu rama actual |
-| ⚠️ `git branch -d [nombre_rama]` | Elimina la rama seleccionada (usar `-D` fuerza eliminación) |
+| ⚠️ `git branch -D [nombre_rama]` | Fuerza eliminación de rama (incluso sin merge) |
 
 ### Conceptos Clave
 
@@ -79,7 +95,9 @@
 
 | Comando | Descripción |
 |---------|-------------|
-| ⚠️ `git reset [~hard] [referencia_objetivo]` | Cambia rama actual a referencia objetivo (con `~hard` descarta todos los cambios) |
+| ⚠️ `git reset --hard [referencia]` | Descarta todos los cambios y commits posteriores (extremadamente peligroso) |
+| `git reset --soft [referencia]` | Mantiene cambios en área de staging |
+| `git reset --mixed [referencia]` | Mantiene cambios en directorio de trabajo (default) |
 
 ## 09 Sincronizar Repositorios
 
@@ -90,8 +108,17 @@
 | `git pull [remoto]` | Obtiene cambios del remoto y fusiona rama actual con upstream |
 | `git push [--tags] [remoto]` | Envía cambios locales al remoto (con `--tags` envía etiquetas) |
 | `git push -u [remoto] [rama]` | Envía rama local al repositorio remoto y establece upstream |
+| ⚠️ `git push --force [remoto] [rama]` | Fuerza push sobrescribiendo historial remoto (muy peligroso) |
 
-## 10 Archivo .gitignore
+## 10 Limpieza
+
+| Comando | Descripción |
+|---------|-------------|
+| ⚠️ `git clean -n` | Muestra qué archivos no rastreados serían eliminados (dry run) |
+| ⚠️ `git clean -f` | Elimina archivos no rastreados (irreversible) |
+| ⚠️ `git clean -fd` | Elimina archivos y directorios no rastreados (irreversible) |
+
+## 11 Archivo .gitignore
 
 Para ignorar archivos, crea un archivo `.gitignore` con patrones:
 
