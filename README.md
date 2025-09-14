@@ -1,6 +1,6 @@
 # 🐙 Git Cheat Sheet – Guía práctica
 
-Guía de Git con los comandos más usados, explicaciones claras y ejemplos prácticos.
+Guía de Git con los comandos más usados.
 
 ---
 
