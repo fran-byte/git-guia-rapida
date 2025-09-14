@@ -227,8 +227,6 @@ docs: actualizar documentación
 
 ---
 
-## 🔹 9. Resumen rápido de comandos esenciales
-
 | Comando           | Uso principal                     | Ejemplo                               |
 | ----------------- | --------------------------------- | ------------------------------------- |
 | git status        | Ver estado de archivos            | `git status`                          |
@@ -246,4 +244,5 @@ docs: actualizar documentación
 | git push          | Subir cambios al remoto           | `git push origin main`                |
 | git stash         | Guardar cambios temporalmente     | `git stash`                           |
 | git stash pop     | Recuperar cambios guardados       | `git stash pop`                       |
-| git reset --har   |                                   |                                       |
+| git reset --hard  | Descartar cambios en archivos y commits | `git reset --hard HEAD` |
+
