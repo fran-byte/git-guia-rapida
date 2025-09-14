@@ -39,6 +39,11 @@ git config --global user.email "tu@email.com"
 
 Configura tu nombre y correo para los commits globalmente.
 
+```
+git config --global --list
+```
+Para ver la configuración global de Git.
+
 ---
 
 ## 🔹 2. Estado y cambios
