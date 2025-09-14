@@ -1,248 +1,118 @@
-# 🐙 Git Cheat Sheet – Guía práctica
+# Guía Rápida de Git
 
-Guía de Git con los comandos más usados.
+## 01 Configuración de Git
 
----
+| Comando | Descripción |
+|---------|-------------|
+| `git config --global user.name "Tu Nombre"` | Establece el nombre que se adjuntará a tus commits y etiquetas |
+| `git config --global user.email "tu@email.com"` | Establece la dirección de correo que se adjuntará a tus commits y etiquetas |
+| `git config --global color.ui auto` | Habilita colores en la salida de Git |
 
-## 🔹 1. Inicialización y configuración
+## 02 Iniciar un Proyecto
 
-```bash
-git init
-```
+| Comando | Descripción |
+|---------|-------------|
+| `git init [nombre_proyecto]` | Crea un nuevo repositorio local en el directorio actual. Si se proporciona `[nombre_proyecto]`, Git creará un nuevo directorio con ese nombre e inicializará un repositorio dentro de él |
+| `git clone [url]` | Descarga un proyecto con todo su historial desde el repositorio remoto |
 
-Crea un repositorio Git nuevo en la carpeta actual.
+## 03 Trabajo Diario
 
-**Ejemplo:**
+| Comando | Descripción |
+|---------|-------------|
+| `git status` | Muestra el estado de tu directorio de trabajo. Incluye archivos nuevos, preparados y modificados |
+| `git add [archivo]` | Añade un archivo al área de preparación. Usa `.` para añadir todos los archivos cambiados |
+| `git diff [archivo]` | Muestra cambios entre el directorio de trabajo y el área de preparación |
+| `git diff --staged [archivo]` | Muestra cambios entre el área de preparación y el repositorio |
+| `git checkout -- [archivo]` | Descarta cambios en el directorio de trabajo. Esta operación no se puede deshacer |
+| `git reset [ruta...]` | Revierte rutas en el índice a su estado en HEAD |
+| `git commit` | Crea un nuevo commit desde los cambios añadidos al área de preparación |
+| `git rm [archivo]` | Elimina archivo del directorio de trabajo y del área de preparación |
 
-```bash
-mkdir mi-proyecto
-cd mi-proyecto
-git init
-```
+## 04 Almacenamiento Temporal
 
-```bash
-git clone <url>
-```
+| Comando | Descripción |
+|---------|-------------|
+| `git stash` | Guarda cambios actuales en el directorio de trabajo para uso posterior |
+| `git stash pop` | Aplica el contenido almacenado en stash al directorio de trabajo y limpia el stash |
+| `git stash drop` | Elimina un stash específico de todos tus stashes anteriores |
 
-Clona un repositorio remoto en tu máquina local.
+## 05 Modelo de Ramas
 
-**Ejemplo:**
+| Comando | Descripción |
+|---------|-------------|
+| `git branch [-a]` | Lista todas las ramas locales. Con `-a` muestra todas las ramas (incluyendo remotas) |
+| `git branch [nombre_rama]` | Crea nueva rama, referenciando el HEAD actual |
+| `git rebase [nombre_rama]` | Aplica commits de la rama actual al HEAD de `[rama]` para hacer el historial más lineal |
+| `git checkout [-b] [nombre_rama]` | Cambia el directorio de trabajo a la rama especificada. Con `-b` crea la rama si no existe |
+| `git merge [nombre_rama]` | Fusiona la rama especificada con tu rama actual |
+| `git branch -d [nombre_rama]` | Elimina la rama seleccionada, si ya está fusionada en otra. `-D` fuerza la eliminación |
 
-```bash
-git clone https://github.com/usuario/proyecto.git
-```
+### Conceptos Clave
 
-```bash
-git config --global user.name "Tu Nombre"
-git config --global user.email "tu@email.com"
-```
+| Término | Descripción |
+|---------|-------------|
+| **Commit** | Un estado de la base de código |
+| **Rama** | Una referencia a un commit; puede tener un upstream rastreado |
+| **Etiqueta** | Una referencia (estándar) o un objeto (anotado) |
+| **HEAD** | La posición actual de tu directorio de trabajo |
 
-Configura tu nombre y correo para los commits globalmente.
+## 06 Inspeccionar Historial
 
-```
-git config --global --list
-```
-Para ver la configuración global de Git.
+| Comando | Descripción |
+|---------|-------------|
+| `git log [~n count]` | Lista el historial de commits de la rama actual. `~n count` limita la lista a los últimos n commits |
+| `git log --oneline --graph --decorate` | Vista general con etiquetas de referencia y gráfico de historial. Un commit por línea |
+| `git log ref...` | Lista commits presentes en la rama actual y no fusionados en ref |
+| `git log ...ref` | Lista commits presentes en ref y no fusionados en la rama actual |
+| `git reflog` | Lista operaciones (ej. checkouts o commits) realizadas en el repositorio local |
 
----
+## 07 Etiquetado de Commits
 
-## 🔹 2. Estado y cambios
+| Comando | Descripción |
+|---------|-------------|
+| `git tag` | Lista todas las etiquetas |
+| `git tag [nombre] [commit sha]` | Crea una referencia de etiqueta llamada `nombre` para el commit actual. Añade `commit sha` para etiquetar un commit específico |
+| `git tag -a [nombre] [commit sha]` | Crea un objeto de etiqueta llamado `nombre` para el commit actual |
+| `git tag -d [nombre]` | Elimina una etiqueta del repositorio local |
 
-```bash
-git status
-```
+## 08 Revertir Cambios
 
-Muestra archivos modificados, listos para commit o sin seguimiento.
+| Comando | Descripción |
+|---------|-------------|
+| `git reset [~hard] [referencia_objetivo]` | Cambia la rama actual a la `referencia_objetivo`, dejando la diferencia como cambio no confirmado. Con `~hard` se descartan todos los cambios |
 
-```bash
-git diff
-```
+## 09 Sincronizar Repositorios
 
-Muestra las diferencias entre los archivos modificados y la última versión guardada.
+| Comando | Descripción |
+|---------|-------------|
+| `git fetch [remoto]` | Obtiene cambios del `remoto`, pero no actualiza las ramas de seguimiento |
+| `git fetch --prune [remoto]` | Elimina referencias remotas que fueron eliminadas del repositorio `remoto` |
+| `git pull [remoto]` | Obtiene cambios del `remoto` y fusiona la rama actual con su upstream |
+| `git push [--tags] [remoto]` | Envía cambios locales al `remoto`. Usa `--tags` para enviar etiquetas |
+| `git push -u [remoto] [rama]` | Envía rama local al repositorio `remoto`. Establece su copia como upstream |
 
-```bash
-git log --oneline
-```
+## 10 Instalación de Git
 
-Muestra el historial de commits de forma resumida.
-
-```bash
-git show <hash>
-```
-
-Muestra los detalles de un commit específico, incluyendo cambios.
-
----
-
-## 🔹 3. Añadir y confirmar cambios
-
-```bash
-git add <archivo>
-git add .
-```
-
-Prepara archivos para commit. `.` añade todos los cambios.
-
-```bash
-git commit -m "Mensaje descriptivo"
-```
-
-Guarda los cambios preparados con un mensaje.
-
-```bash
-git commit -am "Mensaje"
-```
-
-Atajo: añade y hace commit de archivos modificados (no nuevos).
-
----
-
-## 🔹 4. Ramas (Branches)
+Para distribuciones GNU/Linux, Git debería estar disponible en el repositorio del sistema. Por ejemplo, en Debian/Ubuntu:
 
 ```bash
-git branch
+sudo apt-get install git
 ```
 
-Lista todas las ramas y muestra la actual.
+Si necesitas instalar Git desde la fuente, puedes obtenerlo desde **git-scm.com/downloads**.
 
-```bash
-git branch <nombre-rama>
+Un excelente curso de Git se encuentra en el gran libro Pro Git de Scott Chacon y Ben Straub. El libro está disponible gratis en **git-scm.com/book**.
+
+## Archivo .gitignore
+
+Para ignorar archivos, crea un archivo `.gitignore` en tu repositorio con una línea para cada patrón.
+
+Ejemplo:
+```
+logs/*
+!logs/.gitkeep
+tmp/
+*.svp
 ```
 
-Crea una nueva rama.
-
-```bash
-git checkout <nombre-rama>
-```
-
-Cambia a otra rama.
-
-```bash
-git checkout -b <nombre-rama>
-```
-
-Crea y cambia a una nueva rama en un solo paso.
-
-```bash
-git merge <rama>
-```
-
-Fusiona la rama indicada en la actual.
-
-```bash
-git branch -d <rama>
-```
-
-Borra una rama local que ya no se necesita.
-
----
-
-## 🔹 5. Sincronización con remoto
-
-```bash
-git remote -v
-```
-
-Muestra los repositorios remotos configurados.
-
-```bash
-git pull origin <rama>
-```
-
-Trae cambios del remoto y los fusiona con tu rama local.
-
-```bash
-git fetch
-```
-
-Descarga cambios del remoto sin fusionarlos.
-
-```bash
-git push origin <rama>
-```
-
-Sube tus commits locales al remoto.
-
----
-
-## 🔹 6. Arreglos y manejo de errores
-
-```bash
-git reset --hard HEAD~1
-```
-
-Deshace el último commit y borra los cambios.
-
-```bash
-git checkout -- <archivo>
-```
-
-Deshace cambios en un archivo específico.
-
-```bash
-git stash
-```
-
-Guarda temporalmente cambios sin hacer commit.
-
-```bash
-git stash pop
-```
-
-Recupera los cambios guardados con `stash`.
-
----
-
-## 🔹 7. Etiquetas (Tags)
-
-```bash
-git tag <nombre-tag>
-```
-
-Marca un commit con una versión.
-
-```bash
-git tag
-```
-
-Lista todas las etiquetas.
-
-```bash
-git push origin <nombre-tag>
-```
-
-Sube la etiqueta al remoto.
-
----
-
-## 🔹 8. Buenas prácticas en commits
-
-* Mensajes claros y consistentes:
-
-```text
-feat: añadir nueva funcionalidad
-fix: corregir bug
-docs: actualizar documentación
-```
-
----
-
-| Comando           | Uso principal                     | Ejemplo                               |
-| ----------------- | --------------------------------- | ------------------------------------- |
-| git status        | Ver estado de archivos            | `git status`                          |
-| git diff          | Ver cambios antes del commit      | `git diff archivo.txt`                |
-| git add           | Preparar archivos para commit     | `git add index.html`                  |
-| git commit        | Guardar cambios preparados        | `git commit -m "feat: nueva función"` |
-| git commit -am    | Añadir y commitear modificaciones | `git commit -am "fix: bug login"`     |
-| git log --oneline | Historial resumido                | `git log --oneline`                   |
-| git branch        | Listar o crear ramas              | `git branch`                          |
-| git checkout      | Cambiar de rama                   | `git checkout feature-login`          |
-| git checkout -b   | Crear y cambiar a una rama        | `git checkout -b feature-UI`          |
-| git merge         | Fusionar ramas                    | `git merge feature-login`             |
-| git pull          | Traer y fusionar del remoto       | `git pull origin main`                |
-| git fetch         | Traer cambios sin fusionar        | `git fetch origin`                    |
-| git push          | Subir cambios al remoto           | `git push origin main`                |
-| git stash         | Guardar cambios temporalmente     | `git stash`                           |
-| git stash pop     | Recuperar cambios guardados       | `git stash pop`                       |
-| git reset --hard  | Descartar cambios en archivos y commits | `git reset --hard HEAD` |
-
+En este ejemplo, se ignoran todos los archivos en el directorio logs (excepto el archivo `.gitkeep`), el directorio tmp y todos los archivos `.svp`.
