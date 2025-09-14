@@ -1,7 +1,7 @@
 # Guía Rápida de Git
 
 
-⚠️ **ADVERTENCIA**: comandos pueden causar pérdida de trabajo no commitado o alterar permanentemente el historial
+**ADVERTENCIA**: se etiquetarán ⚠️ los comandos pueden causar pérdida de trabajo no commitado o alterar permanentemente el historial
 
 | Comando | Riesgo |
 |---------|--------|
