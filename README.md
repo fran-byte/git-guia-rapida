@@ -91,19 +91,7 @@
 | `git push [--tags] [remoto]` | Envía cambios locales al `remoto`. Usa `--tags` para enviar etiquetas |
 | `git push -u [remoto] [rama]` | Envía rama local al repositorio `remoto`. Establece su copia como upstream |
 
-## 10 Instalación de Git
-
-Para distribuciones GNU/Linux, Git debería estar disponible en el repositorio del sistema. Por ejemplo, en Debian/Ubuntu:
-
-```bash
-sudo apt-get install git
-```
-
-Si necesitas instalar Git desde la fuente, puedes obtenerlo desde **git-scm.com/downloads**.
-
-Un excelente curso de Git se encuentra en el gran libro Pro Git de Scott Chacon y Ben Straub. El libro está disponible gratis en **git-scm.com/book**.
-
-## Archivo .gitignore
+## 10 Archivo .gitignore
 
 Para ignorar archivos, crea un archivo `.gitignore` en tu repositorio con una línea para cada patrón.
 
