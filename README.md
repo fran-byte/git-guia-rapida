@@ -1,10 +1,6 @@
 
 ````markdown
-# 🐙 Git Cheat Sheet – Guía práctica con ejemplos
 
-Guía de Git con los comandos más usados, explicaciones claras y ejemplos prácticos.
-
----
 
 ## 🔹 1. Inicialización y configuración
 ```bash
